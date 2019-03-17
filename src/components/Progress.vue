@@ -4,20 +4,32 @@
       :rotate="360"
       :size="100"
       :width="15"
-      :value="value"
+      :value="procent"
       color="teal"
     >
-      {{ value }}
+      {{ procentText }}
     </v-progress-circular>
   </div>
 </template>
 
 <script>
+
+import store from '../store'
+
   export default {
     data () {
       return {
+        state: store.state,
         interval: {},
         value: 0
+      }
+    },
+    computed: {
+      procent() {
+        return this.state.dayProcent * 100
+      },
+      procentText() {
+        return (this.state.dayProcent * 100).toFixed(2) + '%'
       }
     },
     beforeDestroy () {
